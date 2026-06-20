@@ -1,0 +1,95 @@
+.concerts {
+  background: var(--dark);
+  padding: 120px 60px;
+}
+
+.concerts__container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.concerts__header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.concerts__intro {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.concerts__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.occasion-card {
+  background: var(--dark-3);
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  padding: 36px 28px;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.occasion-card:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  transform: translateY(-4px);
+  background: var(--dark-4);
+}
+
+.occasion-card__icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.occasion-card__title {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.occasion-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.concerts__cta {
+  text-align: center;
+  padding: 50px 0 10px;
+  border-top: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+.concerts__cta-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 900px) {
+  .concerts__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .concerts {
+    padding: 80px 24px;
+  }
+
+  .concerts__grid {
+    grid-template-columns: 1fr;
+  }
+}

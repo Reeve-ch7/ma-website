@@ -1,0 +1,123 @@
+.news {
+  background: var(--dark);
+  padding: 120px 60px;
+}
+
+.news__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.news__header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.news__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.news-card {
+  background: var(--dark-3);
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  padding: 36px 30px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.news-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--gold);
+  transition: height 0.4s ease;
+}
+
+.news-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  transform: translateY(-6px);
+}
+
+.news-card:hover::before {
+  height: 100%;
+}
+
+.news-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.news-card__tag {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: var(--gold);
+  padding: 4px 10px;
+}
+
+.news-card__date {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.8px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.news-card__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.news-card__excerpt {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 24px;
+}
+
+.news-card__link {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.3s ease;
+}
+
+.news-card__link:hover {
+  gap: 14px;
+}
+
+@media (max-width: 1024px) {
+  .news__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .news {
+    padding: 80px 24px;
+  }
+
+  .news__grid {
+    grid-template-columns: 1fr;
+  }
+}
