@@ -28,7 +28,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14" style={{marginRight: 6}} aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>Listen Now
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>Listen Now
           </a>
           <a href="#contact" className="btn-solid">Book Us</a>
         </div>

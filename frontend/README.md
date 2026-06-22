@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Men Aloho — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React SPA built with Create React App.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- **React 19** with React Router DOM v7
+- **Spotify Web API** — live release feed via `src/utils/spotify.js`
+- **CSS custom properties** for theming (light/dark mode)
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm install
+npm start       # dev server at http://localhost:3000
+npm run build   # production build → build/
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Requires the backend running at `http://localhost:5001` for admin features. All sections fall back to hardcoded defaults if the backend is unreachable.
 
-### `npm test`
+## Pages
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Route | Description |
+|-------|-------------|
+| `/` | Main site |
+| `/login` | Admin login |
+| `/settings` | Admin settings panel (requires auth) |
 
-### `npm run build`
+## Sections
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Component | Description |
+|-----------|-------------|
+| `Hero` | Full-screen landing with scroll indicator |
+| `About` | Group photo + ensemble overview |
+| `Gallery` | Masonry photo grid + YouTube videos |
+| `Music` | Live Spotify releases with admin overrides |
+| `News` | News & updates cards |
+| `Concerts` | Upcoming performances |
+| `Contact` | Contact form |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Theming
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Dark/light mode toggled via `[data-theme="dark"]` on `<html>`. All colours use CSS custom properties (`--bg`, `--gold`, `--card-bg`, etc.) defined in `App.css`.
 
-### `npm run eject`
+## Admin
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`AdminContext` manages auth state. The JWT token is stored in `localStorage` as `ma-admin-token`. The Settings link in the navbar is only visible when logged in.

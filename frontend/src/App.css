@@ -118,7 +118,9 @@ h4, h5, h6 {
 
 /* ── BUTTONS ── */
 .btn-primary {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 12px 28px;
   border: 1.5px solid var(--gold);
   color: var(--gold);
