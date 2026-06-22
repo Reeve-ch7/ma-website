@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Hero.css';
 
 export default function Hero() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   return (
     <section id="home" className="hero">
       <div className="hero__overlay" />
@@ -21,7 +28,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            ▶ Listen Now
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14" style={{marginRight: 6}} aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>Listen Now
           </a>
           <a href="#contact" className="btn-solid">Book Us</a>
         </div>
@@ -30,9 +37,10 @@ export default function Hero() {
         </p>
       </div>
 
-      <div className="hero__scroll-hint">
-        <span>Scroll</span>
-        <div className="hero__scroll-line" />
+      <div className={`hero__scroll-hint${scrolled ? ' hero__scroll-hint--hidden' : ''}`}>
+        <svg className="hero__scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="24" height="24" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
       </div>
     </section>
   );

@@ -1,87 +1,81 @@
 .footer {
-  background: #050505;
-  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  background: var(--bg-3);
+  border-top: 1px solid var(--border);
+}
+
+[data-theme="dark"] .footer {
+  background: #060606;
+  border-top-color: rgba(240, 237, 230, 0.12);
 }
 
 .footer__top {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 80px 60px 60px;
+  padding: 72px 60px 56px;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 60px;
+  gap: 56px;
 }
 
 .footer__logo {
   font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--white);
-  letter-spacing: 0.5px;
-  margin-bottom: 12px;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 10px;
 }
 
 .footer__tagline {
-  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 8px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
   line-height: 1.65;
 }
 
 .footer__location {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 1px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .footer__social {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .footer__social-link {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   text-decoration: none;
   transition: all 0.25s ease;
-}
-
-.footer__social-link svg {
-  transition: transform 0.25s ease;
+  background: var(--card-bg);
 }
 
 .footer__social-link:hover {
   border-color: var(--brand, var(--gold));
   color: var(--brand, var(--gold));
-  background: rgba(255, 255, 255, 0.05);
   transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-}
-
-.footer__social-link:hover svg {
-  transform: scale(1.15);
+  box-shadow: var(--shadow);
 }
 
 .footer__col-title {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.8px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .footer__col-links {
@@ -90,35 +84,32 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .footer__col-links li a {
-  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
   text-decoration: none;
   transition: color 0.25s ease;
 }
 
 .footer__col-links li a:hover {
-  color: var(--white);
+  color: var(--text);
 }
 
 .footer__bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 22px 60px;
+  border-top: 1px solid var(--border);
+  padding: 20px 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .footer__copy {
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.78rem;
+  color: var(--text-faint);
 }
 
 .footer__bottom-links {
@@ -127,10 +118,8 @@
 }
 
 .footer__bottom-links a {
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.78rem;
+  color: var(--text-faint);
   text-decoration: none;
   transition: color 0.25s ease;
 }
@@ -144,26 +133,19 @@
     grid-template-columns: 1fr 1fr;
     gap: 40px;
   }
-
-  .footer__brand {
-    grid-column: span 2;
-  }
+  .footer__brand { grid-column: span 2; }
 }
 
 @media (max-width: 600px) {
   .footer__top {
     grid-template-columns: 1fr;
-    padding: 60px 24px 40px;
+    padding: 56px 24px 40px;
   }
-
-  .footer__brand {
-    grid-column: span 1;
-  }
-
+  .footer__brand { grid-column: span 1; }
   .footer__bottom {
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     text-align: center;
-    padding: 24px;
+    padding: 20px 24px;
   }
 }

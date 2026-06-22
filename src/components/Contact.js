@@ -64,14 +64,18 @@ export default function Contact() {
 
           <div className="contact__info-list">
             <div className="contact__info-item">
-              <span className="contact__info-icon">✉</span>
+              <span className="contact__info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="17" height="17" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </span>
               <div>
                 <p className="contact__info-label">Booking Enquiries</p>
                 <p className="contact__info-value">menaloho@gmail.com</p>
               </div>
             </div>
             <div className="contact__info-item">
-              <span className="contact__info-icon">🎤</span>
+              <span className="contact__info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="17" height="17" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              </span>
               <div>
                 <p className="contact__info-label">Management</p>
                 <p className="contact__info-value">
@@ -85,7 +89,9 @@ export default function Contact() {
               </div>
             </div>
             <div className="contact__info-item">
-              <span className="contact__info-icon">📍</span>
+              <span className="contact__info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="17" height="17" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
               <div>
                 <p className="contact__info-label">Based In</p>
                 <p className="contact__info-value">Chennai, India</p>
@@ -118,7 +124,9 @@ export default function Contact() {
         <div className="contact__right">
           {submitted ? (
             <div className="contact__success">
-              <div className="contact__success-icon">✓</div>
+              <div className="contact__success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="28" height="28" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
               <h3>Message Sent</h3>
               <p>Thank you for reaching out to Men Aloho. We'll get back to you shortly.</p>
               <button className="btn-primary" onClick={() => setSubmitted(false)}>
@@ -171,7 +179,7 @@ export default function Contact() {
                   onChange={handleChange} placeholder="Tell us about your event or inquiry..."
                   rows={5} />
               </div>
-              <button type="submit" className="btn-solid" style={{ width: '100%' }}>
+              <button type="submit" className="contact__submit">
                 Submit
               </button>
             </form>
