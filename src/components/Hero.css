@@ -7,12 +7,11 @@
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  background: var(--bg);
-  /* Push content center down by half the navbar height so it's truly centred in visible space */
+  background-color: var(--bg);
   padding-top: 64px;
 }
 
-/* Subtle warm radial glow in light mode */
+/* Overlay gradients live in ::before so background-color can transition freely */
 .hero::before {
   content: '';
   position: absolute;
@@ -21,14 +20,12 @@
     radial-gradient(ellipse at 30% 60%, rgba(154, 111, 26, 0.06) 0%, transparent 55%),
     radial-gradient(ellipse at 75% 30%, rgba(154, 111, 26, 0.04) 0%, transparent 50%);
   pointer-events: none;
-}
-
-[data-theme="dark"] .hero {
-  background: linear-gradient(135deg, #0a0a0a 0%, #110e06 40%, #0a0a0a 100%);
+  transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="dark"] .hero::before {
   background:
+    radial-gradient(ellipse at 30% 60%, rgba(17, 14, 6, 0.8) 0%, transparent 60%),
     radial-gradient(ellipse at 20% 50%, rgba(240, 237, 230, 0.04) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 20%, rgba(240, 237, 230, 0.03) 0%, transparent 50%);
 }
