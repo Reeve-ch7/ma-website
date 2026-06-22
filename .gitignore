@@ -6,5 +6,6 @@ backend/uploads/
 # macOS
 .DS_Store
 
-# IDE
+# IDE / tooling
 .idea/
+.claude/
