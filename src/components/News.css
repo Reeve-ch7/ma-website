@@ -1,6 +1,6 @@
 .news {
-  background: var(--dark);
-  padding: 120px 60px;
+  background: var(--bg-2);
+  padding: 100px 60px;
 }
 
 .news__container {
@@ -10,88 +10,119 @@
 
 .news__header {
   text-align: center;
-  margin-bottom: 70px;
+  margin-bottom: 64px;
 }
 
 .news__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(2, 1fr) repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
 }
 
+/* First card is featured — spans full width */
+.news-card:first-child {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.news-card:first-child .news-card__body {
+  padding: 40px;
+  border-left: 1px solid var(--border);
+}
+
+.news-card:first-child .news-card__accent {
+  background: var(--bg-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.news-card__accent-note {
+  font-size: 4rem;
+  color: var(--border-gold);
+  line-height: 1;
+}
+
+/* Non-featured cards */
 .news-card {
-  background: var(--dark-3);
-  border: 1px solid rgba(201, 168, 76, 0.1);
-  padding: 36px 30px;
-  transition: all 0.3s ease;
-  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   overflow: hidden;
-}
-
-.news-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 0;
-  background: var(--gold);
-  transition: height 0.4s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
 }
 
 .news-card:hover {
-  border-color: rgba(201, 168, 76, 0.3);
-  transform: translateY(-6px);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-gold);
 }
 
-.news-card:hover::before {
-  height: 100%;
+.news-card__body {
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .news-card__meta {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .news-card__tag {
   font-family: var(--font-body);
-  font-size: 0.7rem;
-  letter-spacing: 0.8px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--dark);
+  color: var(--card-bg);
   background: var(--gold);
-  padding: 4px 10px;
+  padding: 3px 10px;
+  border-radius: 100px;
 }
 
 .news-card__date {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  letter-spacing: 0.8px;
-  color: var(--gray);
-  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+  letter-spacing: 0.5px;
 }
 
 .news-card__title {
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  color: var(--white);
-  margin-bottom: 14px;
-  line-height: 1.4;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.news-card:first-child .news-card__title {
+  font-size: 1.5rem;
 }
 
 .news-card__excerpt {
-  font-family: var(--font-body);
   font-size: 0.875rem;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 24px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  flex: 1;
 }
 
 .news-card__link {
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--gold);
@@ -99,7 +130,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: gap 0.3s ease;
+  transition: gap 0.25s ease;
 }
 
 .news-card__link:hover {
@@ -107,17 +138,30 @@
 }
 
 @media (max-width: 1024px) {
-  .news__grid {
-    grid-template-columns: 1fr 1fr;
+  .news-card:first-child {
+    grid-column: span 2;
+    grid-template-columns: 1fr;
+  }
+
+  .news-card:first-child .news-card__accent {
+    display: none;
+  }
+
+  .news-card:first-child .news-card__body {
+    border-left: none;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .news {
     padding: 80px 24px;
   }
 
   .news__grid {
     grid-template-columns: 1fr;
+  }
+
+  .news-card:first-child {
+    grid-column: span 1;
   }
 }

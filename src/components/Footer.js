@@ -5,7 +5,7 @@ const footerLinks = {
   Navigate: [
     { label: 'Home', href: '#home' },
     { label: 'About Us', href: '#about' },
-    { label: 'Our Works', href: '#music' },
+    { label: 'Our Music', href: '#music' },
     { label: 'Gallery', href: '#gallery' },
     { label: 'Book Us', href: '#contact' },
   ],

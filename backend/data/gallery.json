@@ -1,0 +1,51 @@
+[
+  {
+    "hidden": false,
+    "id": "g1",
+    "label": "National Theatre \u2014 2025",
+    "size": "large",
+    "url": ""
+  },
+  {
+    "hidden": false,
+    "id": "g2",
+    "label": "Recording Session",
+    "size": "small",
+    "url": ""
+  },
+  {
+    "hidden": false,
+    "id": "g3",
+    "label": "Tsion Album Cover",
+    "size": "small",
+    "url": ""
+  },
+  {
+    "hidden": false,
+    "id": "g4",
+    "label": "East Africa Tour",
+    "size": "medium",
+    "url": ""
+  },
+  {
+    "hidden": false,
+    "id": "g5",
+    "label": "Award Ceremony 2026",
+    "size": "medium",
+    "url": ""
+  },
+  {
+    "hidden": false,
+    "id": "g6",
+    "label": "Rehearsal \u2014 Addis",
+    "size": "small",
+    "url": ""
+  },
+  {
+    "hidden": false,
+    "id": "g7",
+    "label": "Live at Holy Trinity",
+    "size": "small",
+    "url": ""
+  }
+]
