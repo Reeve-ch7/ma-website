@@ -87,7 +87,7 @@ export default function About() {
         <div className="about__story-hero">
           <img
             src={groupPhotoUrl || '/members/group.jpg'}
-            alt="Men Aloho — The Ensemble"
+            alt="Men Aloho: The Ensemble"
             className="about__story-hero-img"
             onError={e => { e.target.style.display = 'none'; }}
           />
@@ -114,7 +114,7 @@ export default function About() {
             </p>
             <p className="about__bio">
               With a unique blend of voices, the group makes expressive use of Western
-              harmony through part singing — while keeping their musical style
+              harmony through part singing, while keeping their musical style
               predominantly Indian: a strong melody line, expressive slurs, and lyrical
               clarity. For liturgies, they preserve the original Eastern Syrian tunes,
               believing that the natural depth of the male voice heightens the mystique
@@ -153,7 +153,7 @@ export default function About() {
             <h2 className="section-title">Our Choristers</h2>
             <div className="gold-divider" />
             <p className="about__section-desc">
-              Nineteen voices, four parts — each one a distinct instrument in the ensemble.
+              Nineteen voices, four parts, each one a distinct instrument in the ensemble.
             </p>
           </div>
 
@@ -181,7 +181,7 @@ export default function About() {
             <h2 className="section-title">Extended Family</h2>
             <div className="gold-divider" />
             <p className="about__section-desc">
-              Beyond 19 bare voices — Men Aloho collaborates with eminent musicians
+              Beyond 19 bare voices, Men Aloho collaborates with eminent musicians
               for live shows and independent productions.
             </p>
           </div>

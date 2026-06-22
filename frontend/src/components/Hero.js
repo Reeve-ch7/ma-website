@@ -17,7 +17,7 @@ export default function Hero() {
         <p className="hero__eyebrow">Est. 2017 · Chennai, India</p>
         <h1 className="hero__title">Men Aloho</h1>
         <p className="hero__tagline">
-          "From God" — A male vocal ensemble rooted in Gospel &amp; Liturgical music
+          "From God", a male vocal ensemble rooted in Gospel &amp; Liturgical music
           from the Malankara Orthodox tradition.
         </p>
         <div className="hero__divider" />

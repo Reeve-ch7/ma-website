@@ -7,7 +7,7 @@ const FALLBACK_NEWS = [
     id: 'n1',
     date: '2026',
     tag: 'New Release',
-    title: 'Daivam Pirakunnu — Now Streaming',
+    title: 'Daivam Pirakunnu: Now Streaming',
     excerpt:
       'Men Aloho\'s latest release "Daivam Pirakunnu" is now available on YouTube. A powerful Gospel rendition that has deeply moved audiences across Chennai and beyond.',
     link: 'https://www.youtube.com/watch?v=gfeKQae5Wq0',
@@ -18,9 +18,9 @@ const FALLBACK_NEWS = [
     id: 'n2',
     date: '2026',
     tag: 'Milestone',
-    title: 'O Mariyame — Nearing 1 Million Views',
+    title: 'O Mariyame: Nearing 1 Million Views',
     excerpt:
-      'Their beloved Easter Liturgy rendition is fast approaching 1 million views — a testament to the power of their voices and the depth of their devotion.',
+      'Their beloved Easter Liturgy rendition is fast approaching 1 million views, a testament to the power of their voices and the depth of their devotion.',
     link: 'https://www.youtube.com/watch?v=lMjbkypa8N8',
     linkLabel: 'Watch on YouTube',
     hidden: false,

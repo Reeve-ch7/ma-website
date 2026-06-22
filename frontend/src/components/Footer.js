@@ -74,7 +74,7 @@ export default function Footer() {
         <div className="footer__brand">
           <h2 className="footer__logo">Men Aloho</h2>
           <p className="footer__tagline">
-            "From God" — A male vocal ensemble rooted in Gospel &amp; Liturgical music.
+            "From God", a male vocal ensemble rooted in Gospel &amp; Liturgical music.
           </p>
           <p className="footer__location">
             Malankara Orthodox Churches · Chennai, India · Est. 2017

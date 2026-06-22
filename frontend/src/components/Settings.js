@@ -510,7 +510,7 @@ function GroupPhotoTab() {
         <div className="settings-group-preview">
           {url
             ? <img src={url} alt="Group" />
-            : <div className="settings-group-placeholder">No photo set — using placeholder</div>
+            : <div className="settings-group-placeholder">No photo set, using placeholder</div>
           }
         </div>
         <div className="settings-group-fields">

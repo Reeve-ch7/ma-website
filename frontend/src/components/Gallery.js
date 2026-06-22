@@ -3,19 +3,19 @@ import { getGallery, getVideos } from '../api/backend';
 import './Gallery.css';
 
 const FALLBACK_GALLERY = [
-  { id: 'g1', label: 'National Theatre — 2025', size: 'large',  hidden: false, url: '', bg: '#1a1208' },
+  { id: 'g1', label: 'National Theatre 2025', size: 'large',  hidden: false, url: '', bg: '#1a1208' },
   { id: 'g2', label: 'Recording Session',        size: 'small',  hidden: false, url: '', bg: '#0a1520' },
   { id: 'g3', label: 'Tsion Album Cover',        size: 'small',  hidden: false, url: '', bg: '#150a20' },
   { id: 'g4', label: 'East Africa Tour',         size: 'medium', hidden: false, url: '', bg: '#0a1a10' },
   { id: 'g5', label: 'Award Ceremony 2026',      size: 'medium', hidden: false, url: '', bg: '#201008' },
-  { id: 'g6', label: 'Rehearsal — Addis',        size: 'small',  hidden: false, url: '', bg: '#101520' },
+  { id: 'g6', label: 'Rehearsal, Addis',        size: 'small',  hidden: false, url: '', bg: '#101520' },
   { id: 'g7', label: 'Live at Holy Trinity',     size: 'small',  hidden: false, url: '', bg: '#1a1010' },
 ];
 
 const FALLBACK_VIDEOS = [
-  { id: 'v1', title: 'Egziabher Yistilign — Official Video',    views: '2.4M views', duration: '4:32',    hidden: false, url: '' },
-  { id: 'v2', title: 'Live at National Theatre — Full Concert', views: '890K views', duration: '1:12:44', hidden: false, url: '' },
-  { id: 'v3', title: 'Tsion — Behind the Scenes',               views: '340K views', duration: '8:15',    hidden: false, url: '' },
+  { id: 'v1', title: 'Egziabher Yistilign: Official Video',    views: '2.4M views', duration: '4:32',    hidden: false, url: '' },
+  { id: 'v2', title: 'Live at National Theatre: Full Concert', views: '890K views', duration: '1:12:44', hidden: false, url: '' },
+  { id: 'v3', title: 'Tsion: Behind the Scenes',               views: '340K views', duration: '8:15',    hidden: false, url: '' },
 ];
 
 const NOTES = ['♪', '♫', '♩', '♬'];

@@ -79,7 +79,7 @@ export default function Music() {
           <h2 className="section-title">Our Music</h2>
           <div className="gold-divider" />
           <p className="music__intro">
-            Gospel, Liturgical, and original compositions — performed with the depth
+            Gospel, Liturgical, and original compositions, performed with the depth
             and sincerity that only 19 male voices can bring.
           </p>
         </div>

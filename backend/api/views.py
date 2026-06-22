@@ -20,19 +20,19 @@ PASSCODE_HASH = hashlib.sha256(b"JayadeepMathew").hexdigest()
 ALLOWED_EXT = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 
 DEFAULT_GALLERY = [
-    {"id": "g1", "url": "", "label": "National Theatre — 2025",  "size": "large",  "hidden": False},
+    {"id": "g1", "url": "", "label": "National Theatre 2025",  "size": "large",  "hidden": False},
     {"id": "g2", "url": "", "label": "Recording Session",         "size": "small",  "hidden": False},
     {"id": "g3", "url": "", "label": "Tsion Album Cover",         "size": "small",  "hidden": False},
     {"id": "g4", "url": "", "label": "East Africa Tour",          "size": "medium", "hidden": False},
     {"id": "g5", "url": "", "label": "Award Ceremony 2026",       "size": "medium", "hidden": False},
-    {"id": "g6", "url": "", "label": "Rehearsal — Addis",         "size": "small",  "hidden": False},
+    {"id": "g6", "url": "", "label": "Rehearsal, Addis",         "size": "small",  "hidden": False},
     {"id": "g7", "url": "", "label": "Live at Holy Trinity",      "size": "small",  "hidden": False},
 ]
 
 DEFAULT_VIDEOS = [
-    {"id": "v1", "url": "", "title": "Egziabher Yistilign — Official Video",    "views": "2.4M views", "duration": "4:32",    "hidden": False},
-    {"id": "v2", "url": "", "title": "Live at National Theatre — Full Concert", "views": "890K views", "duration": "1:12:44", "hidden": False},
-    {"id": "v3", "url": "", "title": "Tsion — Behind the Scenes",               "views": "340K views", "duration": "8:15",    "hidden": False},
+    {"id": "v1", "url": "", "title": "Egziabher Yistilign: Official Video",    "views": "2.4M views", "duration": "4:32",    "hidden": False},
+    {"id": "v2", "url": "", "title": "Live at National Theatre: Full Concert", "views": "890K views", "duration": "1:12:44", "hidden": False},
+    {"id": "v3", "url": "", "title": "Tsion: Behind the Scenes",               "views": "340K views", "duration": "8:15",    "hidden": False},
 ]
 
 DEFAULT_NEWS = [
@@ -40,7 +40,7 @@ DEFAULT_NEWS = [
         "id": "n1",
         "date": "2026",
         "tag": "New Release",
-        "title": "Daivam Pirakunnu — Now Streaming",
+        "title": "Daivam Pirakunnu: Now Streaming",
         "excerpt": "Men Aloho's latest release \"Daivam Pirakunnu\" is now available on YouTube. A powerful Gospel rendition that has deeply moved audiences across Chennai and beyond.",
         "link": "https://www.youtube.com/watch?v=gfeKQae5Wq0",
         "linkLabel": "Watch on YouTube",
@@ -50,8 +50,8 @@ DEFAULT_NEWS = [
         "id": "n2",
         "date": "2026",
         "tag": "Milestone",
-        "title": "O Mariyame — Nearing 1 Million Views",
-        "excerpt": "Their beloved Easter Liturgy rendition is fast approaching 1 million views — a testament to the power of their voices and the depth of their devotion.",
+        "title": "O Mariyame: Nearing 1 Million Views",
+        "excerpt": "Their beloved Easter Liturgy rendition is fast approaching 1 million views, a testament to the power of their voices and the depth of their devotion.",
         "link": "https://www.youtube.com/watch?v=lMjbkypa8N8",
         "linkLabel": "Watch on YouTube",
         "hidden": False,

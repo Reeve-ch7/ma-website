@@ -58,7 +58,7 @@ export default function Contact() {
           <div className="gold-divider" style={{ margin: '1.2rem 0' }} />
           <p className="contact__desc">
             Please take a moment to fill out the form and we'll get back to you.
-            Whether it's a wedding, baptism, church event, or a concert — we'd love
+            Whether it's a wedding, baptism, church event, or a concert, we'd love
             to be part of your occasion.
           </p>
 
