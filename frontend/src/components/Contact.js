@@ -178,7 +178,7 @@ export default function Contact() {
         {/* Right — Form */}
         <div className="contact__right">
           {submitted ? (
-            <div className="contact__success">
+            <div className="contact__success contact__success--animate">
               <div className="contact__success-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="28" height="28" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
@@ -231,7 +231,7 @@ export default function Contact() {
                 </div>
                 <div className="contact__field">
                   <label htmlFor="eventDate">Event Date</label>
-                  <input id="eventDate" name="eventDate" type="date" value={form.eventDate}
+                  <input id="eventDate" name="eventDate" type="date" min={new Date().toISOString().split('T')[0]} value={form.eventDate}
                     onChange={handleChange} />
                 </div>
               </div>

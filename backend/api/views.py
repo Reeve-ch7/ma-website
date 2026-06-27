@@ -4,7 +4,8 @@ import os
 import uuid
 import datetime
 from pathlib import Path
-from django.core.mail import send_mail
+import threading
+from django.core.mail import EmailMessage
 
 import jwt as pyjwt
 from django.conf import settings
@@ -181,6 +182,184 @@ def group_photo(request):
 
 REQUIRED_FIELDS = {"firstName", "lastName", "email", "subject", "message"}
 
+_logo_path = Path(__file__).resolve().parent.parent.parent / "frontend" / "public" / "men-aloho-logo.jpg"
+LOGO_BYTES = _logo_path.read_bytes() if _logo_path.exists() else None
+
+SHARED_HEAD = """
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  </head>
+"""
+
+SHARED_STYLES = """
+  font-family:'Inter',Arial,sans-serif;
+  background:#f8f6f2;
+  margin:0;padding:0;
+"""
+
+def _row(label, value, bg="#ffffff"):
+    return f"""
+      <tr style="background:{bg};">
+        <td style="padding:10px 16px 10px 0;border-bottom:1px solid #f0ece5;font-family:'Inter',Arial,sans-serif;white-space:nowrap;width:1%;">
+          <span style="font-size:11px;color:#b0a898;">{label}</span>
+        </td>
+        <td style="padding:10px 0;border-bottom:1px solid #f0ece5;text-align:right;font-family:'Inter',Arial,sans-serif;word-break:break-all;">
+          <span style="font-size:13px;color:#1a1a1a;font-weight:500;">{value}</span>
+        </td>
+      </tr>"""
+
+def _header(eyebrow):
+    logo_img = (
+        '<img src="cid:logo" width="36" height="36" alt="Men Aloho" '
+        'style="border-radius:50%;object-fit:cover;display:block;">'
+        if LOGO_BYTES else ""
+    )
+    return f"""
+    <tr>
+      <td style="padding:28px 44px 24px;border-bottom:1px solid #ede8df;">
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="vertical-align:middle;padding-right:12px;">{logo_img}</td>
+            <td style="vertical-align:middle;">
+              <p style="margin:0;font-size:15px;font-weight:700;color:#1a1a1a;font-family:'Montserrat',Arial,sans-serif;letter-spacing:-0.2px;">Men Aloho</p>
+            </td>
+          </tr>
+        </table>
+        <p style="margin:10px 0 0;font-size:10px;color:#b0a898;font-family:'Inter',Arial,sans-serif;">{eyebrow}</p>
+      </td>
+    </tr>"""
+
+def _footer(left, right_href, right_label):
+    return f"""
+    <tr>
+      <td style="padding:16px 44px;border-top:1px solid #ede8df;background:#f8f6f2;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="font-size:11px;color:#c0b8ae;font-family:'Inter',Arial,sans-serif;">{left}</td>
+            <td style="text-align:right;">
+              <a href="{right_href}" style="font-size:11px;color:#c0b8ae;text-decoration:none;font-family:'Inter',Arial,sans-serif;">{right_label}</a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>"""
+
+
+def _build_internal_email(name, reply_to, phone, subject, event_date_display, message, first_name):
+    rows = (
+        _row("Name", name) +
+        _row("Email", f'<a href="mailto:{reply_to}" style="color:#1a1a1a;text-decoration:underline;text-underline-offset:3px;">{reply_to}</a>') +
+        _row("Phone", phone or "Not provided") +
+        _row("Event type", subject.title()) +
+        _row("Event date", event_date_display)
+    )
+    return f"""<!DOCTYPE html><html>{SHARED_HEAD}
+<body style="{SHARED_STYLES}">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8f6f2;padding:48px 20px;">
+    <tr><td align="center">
+      <table width="480" cellpadding="0" cellspacing="0" style="max-width:480px;width:100%;background:#ffffff;border:1px solid #e8e3da;">
+
+        {_header("New booking enquiry")}
+
+        <tr><td style="padding:32px 44px 36px;">
+          <p style="margin:0 0 24px;font-size:13px;color:#5c5c5c;line-height:1.85;font-family:'Inter',Arial,sans-serif;">
+            A booking request has been submitted through the website. Review the details below and reply directly to the enquirer.
+          </p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #f0ece5;margin-bottom:28px;">
+            {rows}
+          </table>
+          <p style="margin:0 0 10px;font-size:10px;color:#b0a898;font-family:'Inter',Arial,sans-serif;">Message</p>
+          <div style="background:#f8f6f2;border-left:2px solid #d0ccc4;padding:16px 20px;margin-bottom:32px;">
+            <p style="margin:0;font-size:13px;color:#3a3a3a;line-height:1.85;font-family:'Inter',Arial,sans-serif;">{message}</p>
+          </div>
+          <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
+            <a href="mailto:{reply_to}" style="display:inline-block;background:#1a1a1a;color:#ffffff;font-family:'Montserrat',Arial,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:13px 28px;">
+              Reply to {first_name}
+            </a>
+          </td></tr></table>
+        </td></tr>
+
+        {_footer("menaloho@gmail.com", "https://menaloho.com", "menaloho.com")}
+
+      </table>
+    </td></tr>
+  </table>
+</body></html>"""
+
+
+def _build_confirmation_email(name, reply_to, first_name, subject, event_date_display):
+    rows = (
+        _row("Event type", subject.title()) +
+        _row("Event date", event_date_display) +
+        _row("Contact", reply_to)
+    )
+    return f"""<!DOCTYPE html><html>{SHARED_HEAD}
+<body style="{SHARED_STYLES}">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8f6f2;padding:48px 20px;">
+    <tr><td align="center">
+      <table width="480" cellpadding="0" cellspacing="0" style="max-width:480px;width:100%;background:#ffffff;border:1px solid #e8e3da;">
+
+        {_header("Booking enquiry received")}
+
+        <tr><td style="padding:32px 44px 36px;">
+          <p style="margin:0 0 10px;font-size:15px;font-weight:700;color:#1a1a1a;font-family:'Montserrat',Arial,sans-serif;letter-spacing:-0.2px;">Thank you, {first_name}.</p>
+          <p style="margin:0 0 16px;font-size:13px;color:#5c5c5c;line-height:1.85;font-family:'Inter',Arial,sans-serif;">
+            We've received your enquiry and are truly glad you reached out. It would be a privilege to be part of your occasion.
+          </p>
+          <p style="margin:0 0 24px;font-size:13px;color:#5c5c5c;line-height:1.85;font-family:'Inter',Arial,sans-serif;">
+            One of us will be in touch with you shortly. In the meantime, here's a summary of what we received.
+          </p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #f0ece5;margin-bottom:24px;">
+            {rows}
+          </table>
+          <p style="margin:0 0 24px;font-size:13px;color:#5c5c5c;line-height:1.85;font-family:'Inter',Arial,sans-serif;">
+            If you have any additional details to share, feel free to reply to this email.
+          </p>
+
+          <p style="margin:0 0 4px;font-size:13px;color:#5c5c5c;font-family:'Inter',Arial,sans-serif;">Warm regards,</p>
+          <p style="margin:0 0 40px;font-size:13px;font-weight:700;color:#1a1a1a;font-family:'Montserrat',Arial,sans-serif;">Men Aloho</p>
+
+          <p style="margin:0 0 10px;font-size:10px;color:#b0a898;font-family:'Inter',Arial,sans-serif;">Listen while you wait</p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #f0ece5;">
+            <tr>
+              <td style="padding:11px 0;border-bottom:1px solid #f0ece5;">
+                <a href="https://www.youtube.com/@MenAloho" style="text-decoration:none;display:flex;align-items:center;gap:10px;">
+                  <span style="font-size:13px;color:#2a2a2a;font-weight:500;font-family:'Inter',Arial,sans-serif;">YouTube</span>
+                </a>
+              </td>
+              <td style="padding:11px 0;border-bottom:1px solid #f0ece5;text-align:right;">
+                <a href="https://www.youtube.com/@MenAloho" style="font-size:11px;color:#c8c4bc;text-decoration:none;">&#8599;</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:11px 0;border-bottom:1px solid #f0ece5;">
+                <span style="font-size:13px;color:#2a2a2a;font-weight:500;font-family:'Inter',Arial,sans-serif;">Spotify</span>
+              </td>
+              <td style="padding:11px 0;border-bottom:1px solid #f0ece5;text-align:right;">
+                <a href="https://open.spotify.com/artist/3elVp9RS2s3wh9ao7x3Xsg" style="font-size:11px;color:#c8c4bc;text-decoration:none;">&#8599;</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:11px 0;">
+                <span style="font-size:13px;color:#2a2a2a;font-weight:500;font-family:'Inter',Arial,sans-serif;">Apple Music</span>
+              </td>
+              <td style="padding:11px 0;text-align:right;">
+                <a href="https://music.apple.com/in/artist/men-aloho/1820565917" style="font-size:11px;color:#c8c4bc;text-decoration:none;">&#8599;</a>
+              </td>
+            </tr>
+          </table>
+        </td></tr>
+
+        {_footer("menaloho.com", "https://www.instagram.com/menaloho", "@menaloho")}
+
+      </table>
+    </td></tr>
+  </table>
+</body></html>"""
+
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def contact(request):
@@ -193,33 +372,47 @@ def contact(request):
     if missing:
         return err(f"Missing fields: {', '.join(sorted(missing))}", 400)
 
-    name = f"{body['firstName'].strip()} {body['lastName'].strip()}"
+    first_name = body["firstName"].strip()
+    name = f"{first_name} {body['lastName'].strip()}"
     reply_to = body["email"].strip()
+
+    if reply_to.lower() == settings.CONTACT_RECIPIENT.lower():
+        return err("Please use a personal email address to get in touch.", 400)
     phone = body.get("phone", "").strip()
     subject = body["subject"].strip()
-    event_date = body.get("eventDate", "").strip()
+    event_date_display = body.get("eventDate", "").strip() or "Not specified"
     message = body["message"].strip()
 
-    email_body = (
-        f"Name: {name}\n"
-        f"Email: {reply_to}\n"
-        f"Phone: {phone or 'Not provided'}\n"
-        f"Event Type: {subject}\n"
-        f"Event Date: {event_date or 'Not specified'}\n\n"
-        f"{message}"
+    internal = EmailMessage(
+        subject=f"[Men Aloho] Booking enquiry — {subject.title()} · {name}",
+        body=_build_internal_email(name, reply_to, phone, subject, event_date_display, message, first_name),
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[settings.CONTACT_RECIPIENT],
+        reply_to=[reply_to],
     )
+    internal.content_subtype = "html"
 
-    try:
-        send_mail(
-            subject=f"[Men Aloho] Booking enquiry — {subject}",
-            message=email_body,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[settings.CONTACT_RECIPIENT],
-            reply_to=[reply_to],
-            fail_silently=False,
-        )
-    except Exception as e:
-        return JsonResponse({"error": "Failed to send email. Please try again later."}, status=500)
+    confirmation = EmailMessage(
+        subject="We've received your enquiry — Men Aloho",
+        body=_build_confirmation_email(name, reply_to, first_name, subject, event_date_display),
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[reply_to],
+    )
+    confirmation.content_subtype = "html"
+
+    if LOGO_BYTES:
+        from email.mime.image import MIMEImage
+        for msg in (internal, confirmation):
+            img = MIMEImage(LOGO_BYTES, "jpeg")
+            img.add_header("Content-ID", "<logo>")
+            img.add_header("Content-Disposition", "inline", filename="logo.jpg")
+            msg.attach(img)
+
+    def send_both():
+        internal.send(fail_silently=True)
+        confirmation.send(fail_silently=True)
+
+    threading.Thread(target=send_both, daemon=True).start()
 
     return ok({"ok": True})
 
