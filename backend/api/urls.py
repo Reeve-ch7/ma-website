@@ -10,4 +10,5 @@ urlpatterns = [
     path("music-overrides", views.music_overrides),
     path("group-photo", views.group_photo),
     path("upload", views.upload),
+    path("contact", views.contact),
 ]

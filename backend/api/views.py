@@ -4,6 +4,7 @@ import os
 import uuid
 import datetime
 from pathlib import Path
+from django.core.mail import send_mail
 
 import jwt as pyjwt
 from django.conf import settings
@@ -176,6 +177,53 @@ def group_photo(request):
     return ok({"ok": True})
 
 
+# ── Contact form ─────────────────────────────────────────────────────────────
+
+REQUIRED_FIELDS = {"firstName", "lastName", "email", "subject", "message"}
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def contact(request):
+    try:
+        body = json.loads(request.body or b"{}")
+    except json.JSONDecodeError:
+        return err("Invalid JSON", 400)
+
+    missing = REQUIRED_FIELDS - {k for k, v in body.items() if str(v).strip()}
+    if missing:
+        return err(f"Missing fields: {', '.join(sorted(missing))}", 400)
+
+    name = f"{body['firstName'].strip()} {body['lastName'].strip()}"
+    reply_to = body["email"].strip()
+    phone = body.get("phone", "").strip()
+    subject = body["subject"].strip()
+    event_date = body.get("eventDate", "").strip()
+    message = body["message"].strip()
+
+    email_body = (
+        f"Name: {name}\n"
+        f"Email: {reply_to}\n"
+        f"Phone: {phone or 'Not provided'}\n"
+        f"Event Type: {subject}\n"
+        f"Event Date: {event_date or 'Not specified'}\n\n"
+        f"{message}"
+    )
+
+    try:
+        send_mail(
+            subject=f"[Men Aloho] Booking enquiry — {subject}",
+            message=email_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.CONTACT_RECIPIENT],
+            reply_to=[reply_to],
+            fail_silently=False,
+        )
+    except Exception as e:
+        return JsonResponse({"error": "Failed to send email. Please try again later."}, status=500)
+
+    return ok({"ok": True})
+
+
 # ── File upload ───────────────────────────────────────────────────────────────
 
 @csrf_exempt
@@ -195,3 +243,4 @@ def upload(request):
         for chunk in f.chunks():
             out.write(chunk)
     return ok({"url": f"http://localhost:5001/uploads/{name}"})
+

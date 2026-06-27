@@ -231,6 +231,16 @@
   border-radius: 8px;
 }
 
+.contact__field input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.5;
+  cursor: pointer;
+  filter: invert(var(--date-icon-invert, 0));
+}
+
+[data-theme="dark"] .contact__field input[type="date"]::-webkit-calendar-picker-indicator {
+  --date-icon-invert: 1;
+}
+
 .contact__field input::placeholder,
 .contact__field textarea::placeholder {
   color: var(--text-faint);
@@ -262,6 +272,21 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.25s ease;
+}
+
+.contact__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.contact__error {
+  font-size: 0.82rem;
+  color: #e53935;
+  background: rgba(229, 57, 53, 0.08);
+  border: 1px solid rgba(229, 57, 53, 0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
 }
 
 .contact__submit:hover {

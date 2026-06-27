@@ -63,17 +63,34 @@ const socialLinks = [
 
 export default function Contact() {
   const [form, setForm] = useState({
-    firstName: '', lastName: '', email: '', phone: '', subject: '', message: '',
+    firstName: '', lastName: '', email: '', phone: '', subject: '', eventDate: '', message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setError('');
+    try {
+      const res = await fetch('http://localhost:5001/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Something went wrong.');
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -197,19 +214,26 @@ export default function Contact() {
                     onChange={handleChange} required />
                 </div>
               </div>
-              <div className="contact__field">
-                <label htmlFor="subject">Event Type *</label>
-                <select id="subject" name="subject" value={form.subject}
-                  onChange={handleChange} required>
-                  <option value="">Type of event</option>
-                  <option value="wedding">Wedding</option>
-                  <option value="baptism">Baptism Ceremony</option>
-                  <option value="church">Church Event</option>
-                  <option value="concert">Live Concert</option>
-                  <option value="recording">Recording / Production</option>
-                  <option value="collaboration">Collaboration</option>
-                  <option value="other">Other</option>
-                </select>
+              <div className="contact__form-row">
+                <div className="contact__field">
+                  <label htmlFor="subject">Event Type *</label>
+                  <select id="subject" name="subject" value={form.subject}
+                    onChange={handleChange} required>
+                    <option value="">Type of event</option>
+                    <option value="wedding">Wedding</option>
+                    <option value="baptism">Baptism Ceremony</option>
+                    <option value="church">Church Event</option>
+                    <option value="concert">Live Concert</option>
+                    <option value="recording">Recording / Production</option>
+                    <option value="collaboration">Collaboration</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div className="contact__field">
+                  <label htmlFor="eventDate">Event Date</label>
+                  <input id="eventDate" name="eventDate" type="date" value={form.eventDate}
+                    onChange={handleChange} />
+                </div>
               </div>
               <div className="contact__field">
                 <label htmlFor="message">Message</label>
@@ -217,8 +241,9 @@ export default function Contact() {
                   onChange={handleChange} placeholder="Tell us about your event or inquiry..."
                   rows={5} />
               </div>
-              <button type="submit" className="contact__submit">
-                Submit
+              {error && <p className="contact__error">{error}</p>}
+              <button type="submit" className="contact__submit" disabled={submitting}>
+                {submitting ? 'Sending…' : 'Submit'}
               </button>
             </form>
           )}
