@@ -17,16 +17,14 @@ export default function Hero() {
         <p className="hero__eyebrow">Est. 2017 · Chennai, India</p>
         <h1 className="hero__title">Men Aloho</h1>
         <p className="hero__tagline">
-          "From God", a male vocal ensemble rooted in Gospel &amp; Liturgical music
-          from the Malankara Orthodox tradition.
+          A male vocal ensemble from Chennai, Bangalore &amp; Kochi, rooted in Gospel &amp; Liturgical music.
         </p>
         <div className="hero__divider" />
         <div className="hero__buttons">
           <a
-            href="https://www.youtube.com/watch?v=gfeKQae5Wq0"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#music"
             className="btn-primary"
+            onClick={() => window.dispatchEvent(new Event('ma:play'))}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>Listen Now
           </a>

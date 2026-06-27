@@ -1,0 +1,40 @@
+.watch {
+  padding: 100px 60px;
+  background: var(--bg-2);
+}
+
+.watch__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.watch__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.watch__embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+}
+
+.watch__embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@media (max-width: 900px) {
+  .watch { padding: 80px 32px; }
+}
+
+@media (max-width: 600px) {
+  .watch { padding: 64px 20px; }
+  .watch__embed { border-radius: 10px; }
+}

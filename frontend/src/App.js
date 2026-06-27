@@ -5,10 +5,11 @@ import { AdminProvider } from './context/AdminContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import News from './components/News';
+import MusicRequest from './components/MusicRequest';
 import Music from './components/Music';
 import Concerts from './components/Concerts';
 import Gallery from './components/Gallery';
+import Watch from './components/Watch';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Login from './components/Login';
@@ -20,9 +21,10 @@ function MainSite({ scrolled, darkMode, toggleDark }) {
       <Navbar scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />
       <Hero />
       <Music />
+      <Watch />
       <About />
       <Concerts />
-      <News />
+      <MusicRequest />
       <Gallery />
       <Contact />
       <Footer />

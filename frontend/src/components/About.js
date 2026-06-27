@@ -6,39 +6,39 @@ const voiceGroups = [
   {
     part: 'Lead Vocalists',
     members: [
-      { name: 'Jephin Jose',       role: 'Choir Leader',  img: '/members/jephin.jpg',   pos: 'center 10%' },
-      { name: 'Sajan Varghese',    role: 'Lead Vocalist', img: '/members/sajan.jpg',    pos: 'center 10%' },
-      { name: 'Akhil C Kuriakose', role: 'Lead Vocalist', img: '/members/akhil.jpg',    pos: 'center 10%' },
-      { name: 'Jino George',       role: 'Lead Vocalist', img: '/members/jino.jpg',     pos: 'center 10%' },
-      { name: 'Roshan Babu',       role: 'Lead Vocalist', img: '/members/roshan.jpg',   pos: 'center 15%' },
-      { name: 'Jiby Chacko',       role: 'Lead Vocalist', img: '/members/jiby.jpg',     pos: 'center 10%' },
+      { name: 'Akhil C Kuriakose', role: 'Lead Vocalist', img: '/members/akhil.jpg',   pos: 'center 10%' },
+      { name: 'Jephin Jose',       role: 'Lead Vocalist',   img: '/members/jephin.jpg',  pos: 'center 10%' },
+      { name: 'Jiby Chacko',       role: 'Lead Vocalist', img: '/members/jiby.jpg',    pos: 'center 10%' },
+      { name: 'Jino George',       role: 'Lead Vocalist', img: '/members/jino.jpg',    pos: 'center 10%' },
+      { name: 'Roshan Babu',       role: 'Lead Vocalist', img: '/members/roshan.jpg',  pos: 'center 15%' },
+      { name: 'Sajan Varghese',    role: 'Lead Vocalist', img: '/members/sajan.jpg',   pos: 'center 10%' },
     ],
   },
   {
     part: 'Tenors',
     members: [
       { name: 'Joseph P George',   role: 'Choir Director · Tenor', img: '/members/joseph.jpg',  pos: 'center 10%' },
-      { name: 'Pramod Jacob John', role: 'Tenor',                  img: '/members/pramod.jpg', pos: 'center 10%' },
-      { name: 'Pinku Jacob',       role: 'Tenor',                  img: '/members/pinku.jpg',  pos: 'center 10%' },
-      { name: 'Sanju Sanu',        role: 'Tenor',                  img: '/members/sanju.jpg',  pos: 'center 20%' },
-      { name: 'Reeve Cherian',     role: 'Tenor',                  img: '/members/reeve.jpg',  pos: 'center 10%' },
+      { name: 'Pramod Jacob John', role: 'Tenor',                  img: '/members/pramod.jpg',  pos: 'center 10%' },
+      { name: 'Sanju Sanu',        role: 'Tenor',                  img: '/members/sanju.jpg',   pos: 'center 20%' },
     ],
   },
   {
     part: 'Baritones',
     members: [
-      { name: 'Nirmal Raj',          role: 'Baritone', img: '/members/nirmal.jpg',   pos: 'center 15%' },
-      { name: 'Abhilash A Abraham',  role: 'Baritone', img: '/members/abhilash.jpg', pos: 'center 20%' },
-      { name: 'Anish Kunjumon',      role: 'Baritone', img: '/members/anishk.jpg',   pos: 'center 10%' },
-      { name: 'Deepu Grasius',       role: 'Baritone', img: '/members/deepu.jpg',    pos: 'center 10%' },
+      { name: 'Abhilash A Abraham', role: 'Baritone', img: '/members/abhilash.jpg', pos: 'center 20%' },
+      { name: 'Anish Kunjumon',     role: 'Baritone', img: '/members/anishk.jpg',   pos: 'center 10%' },
+      { name: 'Deepu Grasius',      role: 'Baritone', img: '/members/deepu.jpg',    pos: 'center 10%' },
+      { name: 'Nirmal Raj',         role: 'Baritone', img: '/members/nirmal.jpg',   pos: 'center 15%' },
+      { name: 'Pinku Jacob',        role: 'Baritone', img: '/members/pinku.jpg',    pos: 'center 10%' },
+      { name: 'Reeve Cherian',      role: 'Baritone', img: '/members/reeve.jpg',    pos: 'center 10%' },
     ],
   },
   {
     part: 'Basses',
     members: [
-      { name: 'John Itty Jacob',   role: 'Bass', img: '/members/john.jpg',     pos: 'center 15%' },
       { name: 'Anish Mathew',      role: 'Bass', img: '/members/anishm.jpg',   pos: 'center 15%' },
       { name: 'Jayadeep Mathew',   role: 'Bass', img: '/members/jayadeep.jpg', pos: 'center 15%' },
+      { name: 'John Itty Jacob',   role: 'Bass', img: '/members/john.jpg',     pos: 'center 15%' },
       { name: 'Rijo John Mathew',  role: 'Bass', img: '/members/rijo.jpg',     pos: 'center 10%' },
     ],
   },
@@ -72,9 +72,17 @@ function MemberCard({ m }) {
 
 export default function About() {
   const [groupPhotoUrl, setGroupPhotoUrl] = useState('');
+  const [photoLoaded, setPhotoLoaded] = useState(false);
+  const heroImgRef = React.useRef(null);
 
   useEffect(() => {
     getGroupPhoto().then(d => { if (d.url) setGroupPhotoUrl(d.url); }).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (heroImgRef.current?.complete && heroImgRef.current.naturalWidth > 0) {
+      setPhotoLoaded(true);
+    }
   }, []);
 
   return (
@@ -86,12 +94,14 @@ export default function About() {
         {/* Full-bleed landscape photo hero */}
         <div className="about__story-hero">
           <img
+            ref={heroImgRef}
             src={groupPhotoUrl || '/members/group.jpg'}
             alt="Men Aloho: The Ensemble"
             className="about__story-hero-img"
+            onLoad={() => setPhotoLoaded(true)}
             onError={e => { e.target.style.display = 'none'; }}
           />
-          <div className="about__story-hero-placeholder" aria-hidden="true">
+          <div className="about__story-hero-placeholder" aria-hidden="true" style={{ opacity: photoLoaded ? 0 : 1, transition: 'opacity 0.4s ease' }}>
             <img src="/men-aloho-logo.jpg" alt="" className="about__placeholder-logo" />
             <p className="about__placeholder-name">Men Aloho</p>
             <p className="about__placeholder-sub">19 Voices · One Heart</p>
@@ -109,37 +119,22 @@ export default function About() {
             <p className="section-subtitle">Our Story</p>
             <p className="about__bio">
               Formed in <strong>2017</strong>, Men Aloho is a group of male singers from
-              various <strong>Malankara Orthodox Churches in Chennai</strong>, united by a
-              deep love for Gospel and Liturgical music.
+              churches across <strong>Chennai, Bangalore, and Kochi</strong>, united by a
+              shared love for Gospel and Liturgical music. The group is regularly invited
+              to sing at weddings, baptism ceremonies, and special occasions.
             </p>
             <p className="about__bio">
-              With a unique blend of voices, the group makes expressive use of Western
-              harmony through part singing, while keeping their musical style
-              predominantly Indian: a strong melody line, expressive slurs, and lyrical
-              clarity. For liturgies, they preserve the original Eastern Syrian tunes,
-              believing that the natural depth of the male voice heightens the mystique
-              of the liturgy.
+              With a unique blend of voices, the group draws on Western harmony through
+              part singing, while keeping their musical identity rooted in the Indian
+              tradition: a strong melody line, expressive slurs, and lyrical clarity.
+              For liturgies, they are devoted to preserving the original Eastern Syrian tunes.
             </p>
             <blockquote className="about__quote">
-              "The natural depth of the male voice heightens the mystique of the liturgy."
+              "Men Aloho": a Syriac phrase meaning "From God."
             </blockquote>
             <a href="#contact" className="btn-primary">Book the Choir</a>
           </div>
 
-          <div className="about__story-stats-panel">
-            <div className="about__stat-item">
-              <span className="about__stat-num">19</span>
-              <span className="about__stat-label">Voices</span>
-            </div>
-            <div className="about__stat-item">
-              <span className="about__stat-num">8+</span>
-              <span className="about__stat-label">Years</span>
-            </div>
-            <div className="about__stat-item">
-              <span className="about__stat-num">1M+</span>
-              <span className="about__stat-label">YouTube Views</span>
-            </div>
-          </div>
         </div>
 
       </div>

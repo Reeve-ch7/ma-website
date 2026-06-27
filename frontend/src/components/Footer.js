@@ -1,5 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Footer.css';
+
+function CopyButton({ text }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return (
+    <button className={`copy-btn ${copied ? 'copy-btn--copied' : ''}`} onClick={handleCopy} aria-label="Copy">
+      <span className="copy-btn__icon">
+        {copied
+          ? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+          : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="12" height="12"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        }
+      </span>
+      <span className="copy-btn__label">{copied ? 'Copied!' : ''}</span>
+    </button>
+  );
+}
 
 const footerLinks = {
   Navigate: [
@@ -12,17 +35,15 @@ const footerLinks = {
   Music: [
     { label: 'YouTube Channel', href: 'https://www.youtube.com/@MenAloho', external: true },
     { label: 'Spotify', href: 'https://open.spotify.com/artist/3elVp9RS2s3wh9ao7x3Xsg', external: true },
-    { label: 'Daivam Pirakunnu', href: 'https://www.youtube.com/watch?v=gfeKQae5Wq0', external: true },
-    { label: 'O Mariyame', href: 'https://www.youtube.com/watch?v=lMjbkypa8N8', external: true },
-    { label: 'Sweet Sweet Spirit', href: 'https://www.youtube.com/watch?v=ajDUt5oMdNM', external: true },
-  ],
-  Contact: [
-    { label: 'menaloho@gmail.com', href: 'mailto:menaloho@gmail.com' },
-    { label: 'Jephin Jose: +91 89251 05222', href: 'tel:+918925105222' },
-    { label: 'Pramod: +91 95001 60320', href: 'tel:+919500160320' },
-    { label: 'Chennai, India', href: '#contact' },
+    { label: 'Apple Music', href: 'https://music.apple.com/in/artist/men-aloho/1820565917', external: true },
   ],
 };
+
+const contactItems = [
+  { label: 'menaloho@gmail.com', href: 'mailto:menaloho@gmail.com', copy: 'menaloho@gmail.com' },
+  { label: 'Pramod: +91 95001 60320', href: 'tel:+919500160320', copy: '+919500160320' },
+  { label: 'Jephin Jose: +91 89251 05222', href: 'tel:+918925105222', copy: '+918925105222' },
+];
 
 const socialLinks = [
   {
@@ -65,6 +86,16 @@ const socialLinks = [
       </svg>
     ),
   },
+  {
+    name: 'Apple Music',
+    href: 'https://music.apple.com/in/artist/men-aloho/1820565917',
+    color: '#fc3c44',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+      </svg>
+    ),
+  },
 ];
 
 export default function Footer() {
@@ -77,7 +108,7 @@ export default function Footer() {
             "From God", a male vocal ensemble rooted in Gospel &amp; Liturgical music.
           </p>
           <p className="footer__location">
-            Malankara Orthodox Churches · Chennai, India · Est. 2017
+            Chennai · Bangalore · Kochi · Est. 2017
           </p>
           <div className="footer__social">
             {socialLinks.map((s) => (
@@ -115,6 +146,18 @@ export default function Footer() {
             </ul>
           </div>
         ))}
+
+        <div className="footer__col">
+          <h4 className="footer__col-title">Contact</h4>
+          <ul className="footer__col-links">
+            {contactItems.map((item) => (
+              <li key={item.label} className="footer__contact-item">
+                <a href={item.href}>{item.label}</a>
+                <CopyButton text={item.copy} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className="footer__bottom">

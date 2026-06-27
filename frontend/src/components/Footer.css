@@ -99,6 +99,65 @@
   color: var(--text);
 }
 
+.footer__contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer__contact-item .copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: var(--text-faint);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.footer__contact-item .copy-btn:hover {
+  color: var(--gold);
+  background: var(--gold-bg);
+}
+
+.footer__contact-item .copy-btn--copied {
+  color: #4caf50;
+}
+
+.footer__contact-item .copy-btn--copied:hover {
+  color: #4caf50;
+  background: rgba(76, 175, 80, 0.08);
+}
+
+.footer__contact-item .copy-btn__icon {
+  display: flex;
+  align-items: center;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.footer__contact-item .copy-btn--copied .copy-btn__icon {
+  transform: scale(1.2);
+}
+
+.footer__contact-item .copy-btn__label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: max-width 0.5s ease, opacity 0.5s ease;
+}
+
+.footer__contact-item .copy-btn--copied .copy-btn__label {
+  max-width: 60px;
+  opacity: 1;
+}
+
 .footer__bottom {
   border-top: 1px solid var(--border);
   padding: 20px 60px;
