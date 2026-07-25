@@ -11,6 +11,14 @@ export default function Hero() {
   }, []);
   return (
     <section id="home" className="hero">
+      <video
+        className="hero__bg-video"
+        autoPlay
+        muted
+        loop
+        playsInline
+        src="/bgVideos/sweet-spirit-bg.mp4"
+      />
       <div className="hero__overlay" />
 
       <div className="hero__content">

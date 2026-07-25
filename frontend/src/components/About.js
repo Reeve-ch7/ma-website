@@ -6,7 +6,7 @@ const voiceGroups = [
   {
     part: 'Lead Vocalists',
     members: [
-      { name: 'Akhil C Kuriakose', role: 'Lead Vocalist', img: '/members/akhil.jpg',   pos: 'center 10%', scale: 1.4 },
+      { name: 'Akhil C Kuriakose', role: 'Lead Vocalist', img: '/members/akhil.jpg',   pos: 'center 25%', scale: 1.4 },
       { name: 'Jephin Jose',       role: 'Lead Vocalist',   img: '/members/jephin.jpg',  pos: 'center 10%' },
       { name: 'Jiby Chacko',       role: 'Lead Vocalist', img: '/members/jiby.jpg',    pos: 'center 10%' },
       { name: 'Jino George',       role: 'Lead Vocalist', img: '/members/jino.jpg',    pos: 'center 10%' },
@@ -17,7 +17,7 @@ const voiceGroups = [
   {
     part: 'Tenors',
     members: [
-      { name: 'Joseph P George',   role: 'Choir Director · Tenor', img: '/members/joseph.jpg',  pos: 'center 50%' },
+      { name: 'Joseph P George',   role: 'Choir Director · Tenor', img: '/members/joseph.jpeg',  pos: 'center 25%' },
       { name: 'Pramod Jacob John', role: 'Tenor',                  img: '/members/pramod.jpg',  pos: 'center 10%' },
       { name: 'Sanju Sanu',        role: 'Tenor',                  img: '/members/sanju.jpg',   pos: 'center 20%' },
     ],
@@ -149,7 +149,7 @@ export default function About() {
             <h2 className="section-title">Our Choristers</h2>
             <div className="gold-divider" />
             <p className="about__section-desc">
-              Nineteen voices, four parts, each one a distinct instrument in the ensemble.
+              Twenty voices, four parts, each one a distinct instrument in the ensemble.
             </p>
           </div>
 

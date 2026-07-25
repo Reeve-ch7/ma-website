@@ -61,9 +61,17 @@
   transition: color 0.3s ease;
 }
 
-/* On transparent nav (top of page), force white in dark mode and dark in light */
+/* On transparent nav (top of page), force white text over video hero */
 .navbar:not(.navbar--scrolled) .navbar__logo-main {
-  color: var(--text);
+  color: #ffffff;
+}
+
+.navbar:not(.navbar--scrolled) .navbar__links:not(.navbar__links--open) li a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.navbar:not(.navbar--scrolled) .navbar__links:not(.navbar__links--open) li a:hover {
+  color: #ffffff;
 }
 
 [data-theme="dark"] .navbar:not(.navbar--scrolled) .navbar__logo-main {
@@ -133,6 +141,18 @@
   background: var(--gold-bg);
 }
 
+.navbar:not(.navbar--scrolled) .navbar__theme-toggle {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.navbar:not(.navbar--scrolled) .navbar__theme-toggle:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .navbar__social-btn {
   display: flex;
   align-items: center;
@@ -152,6 +172,18 @@
   border-color: var(--text-muted);
   color: var(--text);
   background: var(--bg-3);
+}
+
+.navbar:not(.navbar--scrolled) .navbar__social-btn {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.navbar:not(.navbar--scrolled) .navbar__social-btn:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .navbar__right {
@@ -180,6 +212,10 @@
   background: var(--text);
   transition: all 0.35s ease;
   transform-origin: center;
+}
+
+.navbar:not(.navbar--scrolled) .navbar__burger span {
+  background: #ffffff;
 }
 
 .navbar__burger-top    { width: 24px; }

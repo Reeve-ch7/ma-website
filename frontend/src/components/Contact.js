@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Contact.css';
+import useInView from '../utils/useInView';
 
 function CopyButton({ text }) {
   const [copied, setCopied] = useState(false);
@@ -68,6 +69,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [headerRef, headerVisible] = useInView();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -98,7 +100,7 @@ export default function Contact() {
       <div className="contact__container">
 
         {/* Left */}
-        <div className="contact__left">
+        <div ref={headerRef} className={`contact__left fade-in-up${headerVisible ? ' visible' : ''}`}>
           <p className="section-subtitle">Reach Out to Us</p>
           <h2 className="section-title">Book Us</h2>
           <div className="gold-divider" style={{ margin: '1.2rem 0' }} />

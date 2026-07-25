@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getGallery } from '../api/backend';
 import './Gallery.css';
+import useInView from '../utils/useInView';
 
 const FALLBACK_GALLERY = [
   { id: 'g1', label: 'National Theatre 2025', size: 'large',  hidden: false, url: '', bg: '#1a1208' },
@@ -16,6 +17,7 @@ const NOTES = ['♪', '♫', '♩', '♬'];
 
 export default function Gallery() {
   const [galleryItems, setGalleryItems] = useState(FALLBACK_GALLERY);
+  const [headerRef, headerVisible] = useInView();
 
   useEffect(() => {
     getGallery().then(data => setGalleryItems(data)).catch(() => {});
@@ -26,7 +28,7 @@ export default function Gallery() {
   return (
     <section id="gallery" className="gallery">
       <div className="gallery__container">
-        <div className="gallery__header">
+        <div ref={headerRef} className={`gallery__header fade-in-up${headerVisible ? ' visible' : ''}`}>
           <p className="section-subtitle">Visual Journey</p>
           <h2 className="section-title">Gallery</h2>
           <div className="gold-divider" />

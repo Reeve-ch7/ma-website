@@ -101,6 +101,8 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="footer">
+      <div className="footer__bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/bgImages/about_us_cover.jpg)` }} />
+      <div className="footer__overlay" />
       <div className="footer__top">
         <div className="footer__brand">
           <h2 className="footer__logo">Men Aloho</h2>

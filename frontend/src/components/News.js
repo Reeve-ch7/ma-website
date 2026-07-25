@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getNews } from '../api/backend';
 import './News.css';
+import useInView from '../utils/useInView';
 
 const FALLBACK_NEWS = [
   {
@@ -29,6 +30,8 @@ const FALLBACK_NEWS = [
 
 export default function News() {
   const [newsItems, setNewsItems] = useState(FALLBACK_NEWS);
+  const [headerRef, headerVisible] = useInView();
+  const [gridRef, gridVisible] = useInView();
 
   useEffect(() => {
     getNews()
@@ -41,15 +44,15 @@ export default function News() {
   return (
     <section id="news" className="news">
       <div className="news__container">
-        <div className="news__header">
+        <div ref={headerRef} className={`news__header fade-in-up${headerVisible ? ' visible' : ''}`}>
           <p className="section-subtitle">Latest Updates</p>
           <h2 className="section-title">News &amp; Updates</h2>
           <div className="gold-divider" />
         </div>
 
-        <div className="news__grid">
+        <div ref={gridRef} className="news__grid">
           {visible.map((item, i) => (
-            <article className="news-card" key={item.id || i}>
+            <article className={`news-card fade-in-up${gridVisible ? ' visible' : ''} delay-${i + 1}`} key={item.id || i}>
               {i === 0 && (
                 <div className="news-card__accent">
                   <svg className="news-card__accent-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" width="32" height="32" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>

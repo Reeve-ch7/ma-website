@@ -123,6 +123,10 @@
   /* bio column */
 }
 
+.about__story-content .section-subtitle {
+  color: var(--gold);
+}
+
 .about__bio {
   font-size: 0.95rem;
   line-height: 1.85;

@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import './Music.css';
+import useInView from '../utils/useInView';
 
 const ARTIST_ID = '3elVp9RS2s3wh9ao7x3Xsg';
 const EMBED_URL = `https://open.spotify.com/embed/artist/${ARTIST_ID}?utm_source=generator&theme=0`;
 
 export default function Music() {
   const iframeRef = useRef(null);
+  const [headerRef, headerVisible] = useInView();
 
   useEffect(() => {
     const handler = () => {
@@ -19,7 +21,7 @@ export default function Music() {
     <section id="music" className="music">
       <div className="music__container">
 
-        <div className="music__header">
+        <div ref={headerRef} className={`music__header fade-in-up${headerVisible ? ' visible' : ''}`}>
           <p className="section-subtitle">Our Productions</p>
           <h2 className="section-title">Our Music</h2>
           <div className="gold-divider" />

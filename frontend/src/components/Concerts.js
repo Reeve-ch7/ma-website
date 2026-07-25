@@ -1,5 +1,6 @@
 import React from 'react';
 import './Concerts.css';
+import useInView from '../utils/useInView';
 
 const RingsIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="22" height="22" aria-hidden="true">
@@ -38,19 +39,22 @@ const UsersIcon = () => (
 );
 
 const occasions = [
-  { Icon: RingsIcon,    title: 'Weddings',           desc: 'Sacred hymns and Gospel arrangements to bless your special day with music that moves hearts.' },
-  { Icon: CrossIcon,    title: 'Baptism Ceremonies', desc: 'Liturgical chants and devotional music for holy sacraments and christening celebrations.' },
-  { Icon: ChurchIcon,   title: 'Church Events',      desc: 'Feast days, anniversaries, and special parish celebrations, performed with reverence.' },
-  { Icon: MusicNoteIcon,title: 'Live Concerts',      desc: 'Full-ensemble performances with optional orchestral accompaniment for a complete experience.' },
-  { Icon: MicIcon,      title: 'Recordings',         desc: 'Studio and live recording sessions for albums, productions, and digital releases.' },
-  { Icon: UsersIcon,    title: 'Collaborations',     desc: 'Open to collaborating with musicians, choirs, and ensembles across genres and traditions.' },
+  { Icon: RingsIcon,    title: 'Weddings',           desc: 'Sacred hymns and Gospel arrangements to bless your special day with music that moves hearts.', bg: '/bgImages/matrimony.jpg' },
+  { Icon: CrossIcon,    title: 'Baptism Ceremonies', desc: 'Liturgical chants and devotional music for holy sacraments and christening celebrations.', bg: '/bgImages/baptism.jpeg' },
+  { Icon: ChurchIcon,   title: 'Church Events',      desc: 'Feast days, anniversaries, and special parish celebrations, performed with reverence.', bg: '/bgImages/church_event.jpg' },
+  { Icon: MusicNoteIcon,title: 'Live Concerts',      desc: 'Full-ensemble performances with optional orchestral accompaniment for a complete experience.', bg: '/bgImages/live_concerts.avif' },
+  { Icon: MicIcon,      title: 'Recordings',         desc: 'Studio and live recording sessions for albums, productions, and digital releases.', bg: '/bgImages/recording.jpg' },
+  { Icon: UsersIcon,    title: 'Collaborations',     desc: 'Open to collaborating with musicians, choirs, and ensembles across genres and traditions.', bg: '/bgImages/collaborations.jpg' },
 ];
 
 export default function Concerts() {
+  const [headerRef, headerVisible] = useInView();
+  const [gridRef, gridVisible] = useInView();
+
   return (
     <section id="concerts" className="concerts">
       <div className="concerts__container">
-        <div className="concerts__header">
+        <div ref={headerRef} className={`concerts__header fade-in-up${headerVisible ? ' visible' : ''}`}>
           <p className="section-subtitle">Where You'll Find Us</p>
           <h2 className="section-title">Performances &amp; Events</h2>
           <div className="gold-divider" />
@@ -60,14 +64,17 @@ export default function Concerts() {
           </p>
         </div>
 
-        <div className="concerts__grid">
+        <div ref={gridRef} className="concerts__grid">
           {occasions.map((o, i) => (
-            <div className="occasion-card" key={i}>
-              <div className="occasion-card__icon-wrap">
-                <o.Icon />
+            <div className={`occasion-card fade-in-up${gridVisible ? ' visible' : ''} delay-${i + 1}`} key={i} style={{ backgroundImage: `url(${process.env.PUBLIC_URL}${o.bg})` }}>
+              <div className="occasion-card__overlay" />
+              <div className="occasion-card__content">
+                <div className="occasion-card__icon-wrap">
+                  <o.Icon />
+                </div>
+                <h3 className="occasion-card__title">{o.title}</h3>
+                <p className="occasion-card__desc">{o.desc}</p>
               </div>
-              <h3 className="occasion-card__title">{o.title}</h3>
-              <p className="occasion-card__desc">{o.desc}</p>
             </div>
           ))}
         </div>
