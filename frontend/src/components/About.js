@@ -17,7 +17,7 @@ const voiceGroups = [
   {
     part: 'Tenors',
     members: [
-      { name: 'Joseph P George',   role: 'Choir Director · Tenor', img: '/members/joseph.jpg',  pos: 'center 10%' },
+      { name: 'Joseph P George',   role: 'Choir Director · Tenor', img: '/members/joseph.jpg',  pos: 'center 30%' },
       { name: 'Pramod Jacob John', role: 'Tenor',                  img: '/members/pramod.jpg',  pos: 'center 10%' },
       { name: 'Sanju Sanu',        role: 'Tenor',                  img: '/members/sanju.jpg',   pos: 'center 20%' },
     ],
@@ -31,13 +31,13 @@ const voiceGroups = [
       { name: 'Nirmal Raj',         role: 'Baritone', img: '/members/nirmal.jpg',   pos: 'center 15%' },
       { name: 'Pinku Jacob',        role: 'Baritone', img: '/members/pinku.jpg',    pos: 'center 10%' },
       { name: 'Reeve Cherian',      role: 'Baritone', img: '/members/reeve.jpg',    pos: 'center 10%' },
-      { name: 'Shimron John Alexander',            role: 'Baritone', img: '/members/shimron.jpg',  pos: 'center 10%' },
+      { name: 'Shimron John Alexander',            role: 'Baritone', img: '/members/shimron.jpeg',  pos: 'center 10%' },
     ],
   },
   {
     part: 'Basses',
     members: [
-      { name: 'Anish Mathew',      role: 'Bass', img: '/members/anishm.jpg',   pos: 'center 15%' },
+      { name: 'Anish Mathew',      role: 'Bass', img: '/members/anishm.png',   pos: 'center 15%' },
       { name: 'Jayadeep Mathew',   role: 'Bass', img: '/members/jayadeep.jpg', pos: 'center 15%' },
       { name: 'John Itty Jacob',   role: 'Bass', img: '/members/john.jpg',     pos: 'center 15%' },
       { name: 'Rijo John Mathew',  role: 'Bass', img: '/members/rijo.jpg',     pos: 'center 10%' },
