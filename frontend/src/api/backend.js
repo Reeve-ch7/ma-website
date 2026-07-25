@@ -1,4 +1,5 @@
-const BASE = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5001';
+const BASE = process.env.REACT_APP_BACKEND_URL
+  || (window.location.hostname === 'localhost' ? 'http://localhost:5001' : 'https://ma-website-te67.vercel.app');
 
 function getToken() {
   return localStorage.getItem('ma-admin-token') || '';
