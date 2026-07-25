@@ -105,7 +105,7 @@ export default function About() {
           <div className="about__story-hero-placeholder" aria-hidden="true" style={{ opacity: photoLoaded ? 0 : 1, transition: 'opacity 0.4s ease' }}>
             <img src="/men-aloho-logo.jpg" alt="" className="about__placeholder-logo" />
             <p className="about__placeholder-name">Men Aloho</p>
-            <p className="about__placeholder-sub">19 Voices · One Heart</p>
+            <p className="about__placeholder-sub">20 Voices · One Heart</p>
           </div>
           <div className="about__story-hero-overlay">
             <p className="about__story-hero-eyebrow">Est. 2017 · Chennai, India</p>
@@ -177,7 +177,7 @@ export default function About() {
             <h2 className="section-title">Extended Family</h2>
             <div className="gold-divider" />
             <p className="about__section-desc">
-              Beyond 19 bare voices, Men Aloho collaborates with eminent musicians
+              Beyond 20 bare voices, Men Aloho collaborates with eminent musicians
               for live shows and independent productions.
             </p>
           </div>

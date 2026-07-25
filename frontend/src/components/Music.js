@@ -25,7 +25,7 @@ export default function Music() {
           <div className="gold-divider" />
           <p className="music__intro">
             Gospel, Liturgical, and original compositions, performed with the depth
-            and sincerity that only 19 male voices can bring.
+            and sincerity that only male voices can bring.
           </p>
         </div>
 
