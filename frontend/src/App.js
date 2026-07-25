@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Settings from './components/Settings';
 import Enquiry from './components/Enquiry';
+import NotFound from './components/NotFound';
 
 function MainSite({ scrolled, darkMode, toggleDark }) {
   return (
@@ -71,6 +72,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/enquiry" element={<Enquiry />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </AdminProvider>
