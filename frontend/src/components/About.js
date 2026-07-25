@@ -6,7 +6,7 @@ const voiceGroups = [
   {
     part: 'Lead Vocalists',
     members: [
-      { name: 'Akhil C Kuriakose', role: 'Lead Vocalist', img: '/members/akhil.jpg',   pos: 'center 10%' },
+      { name: 'Akhil C Kuriakose', role: 'Lead Vocalist', img: '/members/akhil.jpg',   pos: 'center 10%', scale: 1.4 },
       { name: 'Jephin Jose',       role: 'Lead Vocalist',   img: '/members/jephin.jpg',  pos: 'center 10%' },
       { name: 'Jiby Chacko',       role: 'Lead Vocalist', img: '/members/jiby.jpg',    pos: 'center 10%' },
       { name: 'Jino George',       role: 'Lead Vocalist', img: '/members/jino.jpg',    pos: 'center 10%' },
@@ -17,7 +17,7 @@ const voiceGroups = [
   {
     part: 'Tenors',
     members: [
-      { name: 'Joseph P George',   role: 'Choir Director · Tenor', img: '/members/joseph.jpg',  pos: 'center 30%' },
+      { name: 'Joseph P George',   role: 'Choir Director · Tenor', img: '/members/joseph.jpg',  pos: 'center 50%' },
       { name: 'Pramod Jacob John', role: 'Tenor',                  img: '/members/pramod.jpg',  pos: 'center 10%' },
       { name: 'Sanju Sanu',        role: 'Tenor',                  img: '/members/sanju.jpg',   pos: 'center 20%' },
     ],
@@ -60,7 +60,7 @@ function MemberCard({ m }) {
           src={m.img}
           alt={m.name}
           className="member-card__photo"
-          style={{ objectPosition: m.pos || 'center 15%' }}
+          style={{ objectPosition: m.pos || 'center 15%', transform: m.scale ? `scale(${m.scale})` : undefined }}
         />
       </div>
       <div className="member-card__info">
