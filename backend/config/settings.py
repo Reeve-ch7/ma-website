@@ -24,7 +24,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {}
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://ma-website-mauve.vercel.app",
+]
+CORS_ALLOW_ALL_ORIGINS = os.environ.get("CORS_ALLOW_ALL", "").lower() == "true"
 
 MEDIA_URL = "/uploads/"
 MEDIA_ROOT = BASE_DIR / "uploads"
