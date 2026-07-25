@@ -1,4 +1,4 @@
-const BASE = 'http://localhost:5001';
+const BASE = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5001';
 
 function getToken() {
   return localStorage.getItem('ma-admin-token') || '';
