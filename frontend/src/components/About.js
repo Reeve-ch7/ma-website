@@ -31,6 +31,7 @@ const voiceGroups = [
       { name: 'Nirmal Raj',         role: 'Baritone', img: '/members/nirmal.jpg',   pos: 'center 15%' },
       { name: 'Pinku Jacob',        role: 'Baritone', img: '/members/pinku.jpg',    pos: 'center 10%' },
       { name: 'Reeve Cherian',      role: 'Baritone', img: '/members/reeve.jpg',    pos: 'center 10%' },
+      { name: 'Shimron John Alexander',            role: 'Baritone', img: '/members/shimron.jpg',  pos: 'center 10%' },
     ],
   },
   {

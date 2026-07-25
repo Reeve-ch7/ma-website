@@ -102,11 +102,6 @@ export default function Navbar({ scrolled, darkMode, toggleDark }) {
             <AppleMusicIcon /> Apple Music
           </a>
         </li>
-        <li className="navbar__theme-li">
-          <button className="navbar__theme-toggle" onClick={toggleDark} aria-label="Toggle theme">
-            {darkMode ? <SunIcon /> : <MoonIcon />}
-          </button>
-        </li>
       </ul>
 
       <div className="navbar__right">

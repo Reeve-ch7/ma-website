@@ -154,10 +154,6 @@
   background: var(--bg-3);
 }
 
-.navbar__theme-li {
-  display: none;
-}
-
 .navbar__right {
   display: flex;
   align-items: center;
@@ -219,10 +215,6 @@
     display: flex;
   }
 
-  .navbar__theme-toggle--desktop {
-    display: none !important;
-  }
-
   /* Hide social icons from the top bar on mobile */
   .navbar__social-btn--desktop {
     display: none !important;
@@ -257,15 +249,16 @@
     color: var(--text);
   }
 
-  .navbar__theme-li {
-    display: flex;
-  }
-
   /* Social icons pinned to bottom of panel */
   .navbar__menu-socials {
     display: flex;
-    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 16px;
     margin-top: auto;
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 
   .navbar__menu-socials .navbar__social-btn {
@@ -276,15 +269,16 @@
     background: none;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-family: var(--font-body);
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--text-muted);
     text-decoration: none;
     transition: color 0.2s ease;
+    white-space: nowrap;
   }
 
   .navbar__menu-socials .navbar__social-btn:hover {
