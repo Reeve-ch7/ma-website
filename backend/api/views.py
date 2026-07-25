@@ -13,10 +13,14 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
-DATA_DIR = settings.BASE_DIR / "data"
-UPLOAD_DIR = settings.BASE_DIR / "uploads"
-DATA_DIR.mkdir(exist_ok=True)
-UPLOAD_DIR.mkdir(exist_ok=True)
+# On Vercel (read-only /var/task), use /tmp for writable directories
+_on_vercel = os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME")
+
+DATA_DIR = Path("/tmp/data") if _on_vercel else settings.BASE_DIR / "data"
+UPLOAD_DIR = Path("/tmp/uploads") if _on_vercel else settings.BASE_DIR / "uploads"
+
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 PASSCODE_HASH = hashlib.sha256(b"JayadeepMathew").hexdigest()
 ALLOWED_EXT = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
@@ -66,6 +70,10 @@ DEFAULT_NEWS = [
 def load_data(name, default=None):
     path = DATA_DIR / f"{name}.json"
     if not path.exists():
+        # Fall back to bundled data shipped with the repo
+        bundled = settings.BASE_DIR / "data" / f"{name}.json"
+        if bundled.exists():
+            return json.loads(bundled.read_text())
         return default
     return json.loads(path.read_text())
 
@@ -435,5 +443,6 @@ def upload(request):
     with open(dest, "wb") as out:
         for chunk in f.chunks():
             out.write(chunk)
-    return ok({"url": f"http://localhost:5001/uploads/{name}"})
+    # Note: On Vercel serverless, /tmp is ephemeral — files won't persist.
+    return ok({"url": f"/uploads/{name}"})
 
