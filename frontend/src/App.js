@@ -14,6 +14,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Settings from './components/Settings';
+import Enquiry from './components/Enquiry';
 
 function MainSite({ scrolled, darkMode, toggleDark }) {
   return (
@@ -69,6 +70,7 @@ function App() {
           <Route path="/" element={<MainSite scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/enquiry" element={<Enquiry />} />
         </Routes>
       </BrowserRouter>
     </AdminProvider>

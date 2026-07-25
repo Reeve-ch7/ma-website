@@ -1,5 +1,6 @@
-const BASE = process.env.REACT_APP_BACKEND_URL
+export const API_BASE = process.env.REACT_APP_BACKEND_URL
   || (window.location.hostname === 'localhost' ? 'http://localhost:5001' : 'https://ma-website-te67.vercel.app');
+const BASE = API_BASE;
 
 function getToken() {
   return localStorage.getItem('ma-admin-token') || '';
