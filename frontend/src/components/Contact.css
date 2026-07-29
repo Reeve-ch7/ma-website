@@ -8,9 +8,17 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 80px;
+  grid-template-areas:
+    "intro form"
+    "details form";
+  column-gap: 80px;
+  row-gap: 0;
   align-items: start;
 }
+
+.contact__intro   { grid-area: intro; }
+.contact__details { grid-area: details; }
+.contact__right   { grid-area: form; }
 
 .contact__desc {
   font-size: 0.925rem;
@@ -204,6 +212,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .contact__field label {
@@ -369,12 +378,43 @@
 @media (max-width: 1024px) {
   .contact__container {
     grid-template-columns: 1fr;
-    gap: 48px;
+    grid-template-areas:
+      "intro"
+      "details"
+      "form";
+    row-gap: 48px;
   }
 }
 
 @media (max-width: 600px) {
-  .contact { padding: 80px 20px; }
-  .contact__right { padding: 28px 20px; border-radius: 16px; }
-  .contact__form-row { grid-template-columns: 1fr; }
+  .contact { padding: 56px 20px; }
+
+  .contact__container {
+    grid-template-areas:
+      "intro"
+      "form"
+      "details";
+    row-gap: 32px;
+  }
+
+  .contact__right { padding: 26px 18px; border-radius: 16px; }
+
+  .contact__form { gap: 14px; }
+
+  .contact__form-row { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .contact__field { gap: 5px; }
+
+  .contact__field label { font-size: 0.65rem; }
+
+  .contact__field input,
+  .contact__field select,
+  .contact__field textarea {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .contact__field textarea { height: 84px; }
+
+  .contact__submit { padding: 12px; }
 }

@@ -99,8 +99,8 @@ export default function Contact() {
     <section id="contact" className="contact">
       <div className="contact__container">
 
-        {/* Left */}
-        <div ref={headerRef} className={`contact__left fade-in-up${headerVisible ? ' visible' : ''}`}>
+        {/* Intro */}
+        <div ref={headerRef} className={`contact__intro fade-in-up${headerVisible ? ' visible' : ''}`}>
           <p className="section-subtitle">Reach Out to Us</p>
           <h2 className="section-title">Book Us</h2>
           <div className="gold-divider" style={{ margin: '1.2rem 0' }} />
@@ -109,7 +109,10 @@ export default function Contact() {
             Whether it's a wedding, baptism, church event, or a concert, we'd love
             to be part of your occasion.
           </p>
+        </div>
 
+        {/* Details */}
+        <div className="contact__details">
           <div className="contact__info-list">
             <div className="contact__info-item">
               <span className="contact__info-icon">

@@ -152,11 +152,25 @@
 }
 
 @media (max-width: 600px) {
-  .choristers-page__hero { padding: 120px 20px 64px; }
-  .about__extended-section { padding: 64px 20px; }
+  .choristers-page__hero { padding: 100px 16px 40px; }
+  .about__extended-section { padding: 48px 16px 56px; }
+
+  .about__section-header { margin-bottom: 32px; }
+
+  .about__section-desc { font-size: 0.82rem; }
+
+  .about__voice-group { margin-bottom: 32px; }
+
+  .about__voice-group-label { margin-bottom: 14px; }
 
   .about__members-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
+
+  .member-card__info { padding: 8px 8px 10px; }
+
+  .member-card__name { font-size: 0.72rem; margin-bottom: 2px; }
+
+  .member-card__role { font-size: 0.54rem; letter-spacing: 0.5px; }
 }
