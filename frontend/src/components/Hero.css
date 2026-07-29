@@ -58,7 +58,7 @@
   font-size: 0.68rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #e8c44a;
+  color: #ffffff;
   margin-bottom: 20px;
   font-weight: 600;
   opacity: 0;
@@ -149,7 +149,7 @@
 }
 
 .hero__latest span {
-  color: #e8c44a;
+  color: #ffffff;
   font-weight: 600;
 }
 

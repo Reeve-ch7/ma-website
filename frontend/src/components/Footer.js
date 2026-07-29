@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './Footer.css';
 
 function CopyButton({ text }) {
@@ -40,9 +41,9 @@ const footerLinks = {
 };
 
 const contactItems = [
-  { label: 'menaloho@gmail.com', href: 'mailto:menaloho@gmail.com', copy: 'menaloho@gmail.com' },
-  { label: 'Pramod: +91 95001 60320', href: 'tel:+919500160320', copy: '+919500160320' },
-  { label: 'Jephin Jose: +91 89251 05222', href: 'tel:+918925105222', copy: '+918925105222' },
+  { value: 'menaloho@gmail.com', href: 'mailto:menaloho@gmail.com', copy: 'menaloho@gmail.com' },
+  { name: 'Pramod', value: '+91 95001 60320', href: 'tel:+919500160320', copy: '+919500160320' },
+  { name: 'Jephin Jose', value: '+91 97908 79681', href: 'tel:+919790879681', copy: '+919790879681' },
 ];
 
 const socialLinks = [
@@ -99,9 +100,11 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const { pathname } = useLocation();
+  const hashHref = (href) => (pathname === '/' ? href : `/${href}`);
+
   return (
     <footer className="footer">
-      <div className="footer__bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/bgImages/about_us_cover.jpg)` }} />
       <div className="footer__overlay" />
       <div className="footer__top">
         <div className="footer__brand">
@@ -137,7 +140,7 @@ export default function Footer() {
               {links.map((link) => (
                 <li key={link.label}>
                   <a
-                    href={link.href}
+                    href={link.external ? link.href : hashHref(link.href)}
                     target={link.external ? '_blank' : undefined}
                     rel={link.external ? 'noopener noreferrer' : undefined}
                   >
@@ -153,8 +156,11 @@ export default function Footer() {
           <h4 className="footer__col-title">Contact</h4>
           <ul className="footer__col-links">
             {contactItems.map((item) => (
-              <li key={item.label} className="footer__contact-item">
-                <a href={item.href}>{item.label}</a>
+              <li key={item.copy} className="footer__contact-item">
+                <div className="footer__contact-text">
+                  {item.name && <span className="footer__contact-name">{item.name}</span>}
+                  <a href={item.href}>{item.value}</a>
+                </div>
                 <CopyButton text={item.copy} />
               </li>
             ))}
@@ -169,7 +175,7 @@ export default function Footer() {
         <div className="footer__bottom-links">
           <a href="https://www.instagram.com/menaloho" target="_blank" rel="noopener noreferrer">@menaloho</a>
           <a href="https://www.youtube.com/@MenAloho" target="_blank" rel="noopener noreferrer">YouTube</a>
-          <a href="#contact">Contact</a>
+          <a href={hashHref('#contact')}>Contact</a>
         </div>
       </div>
     </footer>

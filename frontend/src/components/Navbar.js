@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAdmin } from '../context/AdminContext';
 import './Navbar.css';
 
@@ -53,6 +54,8 @@ export default function Navbar({ scrolled, darkMode, toggleDark }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isAdmin } = useAdmin();
   const navRef = useRef(null);
+  const { pathname } = useLocation();
+  const hashHref = (href) => (pathname === '/' ? href : `/${href}`);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -67,7 +70,7 @@ export default function Navbar({ scrolled, darkMode, toggleDark }) {
 
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} ref={navRef}>
-      <a href="#home" className="navbar__logo" onClick={() => setMenuOpen(false)}>
+      <a href={hashHref('#home')} className="navbar__logo" onClick={() => setMenuOpen(false)}>
         <img
           src="/men-aloho-logo.jpg"
           alt="Men Aloho Logo"
@@ -79,7 +82,7 @@ export default function Navbar({ scrolled, darkMode, toggleDark }) {
       <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
         {navLinks.map((link) => (
           <li key={link.label}>
-            <a href={link.href} onClick={() => setMenuOpen(false)}>
+            <a href={hashHref(link.href)} onClick={() => setMenuOpen(false)}>
               {link.label}
             </a>
           </li>

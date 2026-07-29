@@ -7,8 +7,6 @@ export default function MusicRequest() {
 
   return (
     <section className="music-request">
-      <div className="music-request__bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/bgImages/music_notes_cover.jpg)` }} />
-      <div className="music-request__overlay" />
       <div ref={ref} className={`music-request__inner fade-in-up${visible ? ' visible' : ''}`}>
         <p className="section-eyebrow">Get In Touch</p>
         <h2 className="section-title">Tracks &amp; Sheet Music</h2>

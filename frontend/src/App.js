@@ -5,6 +5,7 @@ import { AdminProvider } from './context/AdminContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Choristers from './components/Choristers';
 import MusicRequest from './components/MusicRequest';
 import Music from './components/Music';
 import Concerts from './components/Concerts';
@@ -29,6 +30,16 @@ function MainSite({ scrolled, darkMode, toggleDark }) {
       <MusicRequest />
       <Gallery />
       <Contact />
+      <Footer />
+    </div>
+  );
+}
+
+function ChoristersPage({ scrolled, darkMode, toggleDark }) {
+  return (
+    <div className="App">
+      <Navbar scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />
+      <Choristers />
       <Footer />
     </div>
   );
@@ -69,6 +80,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainSite scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />} />
+          <Route path="/choristers" element={<ChoristersPage scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/enquiry" element={<Enquiry />} />

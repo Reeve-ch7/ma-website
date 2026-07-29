@@ -139,8 +139,8 @@ export default function Contact() {
                 <p className="contact__info-value" style={{marginTop: '6px'}}>
                   Jephin Jose<br/>
                   <span className="contact__info-value--copyable">
-                    <a href="tel:+918925105222" className="contact__phone-link">+91 89251 05222</a>
-                    <CopyButton text="+918925105222" />
+                    <a href="tel:+919790879681" className="contact__phone-link">+91 97908 79681</a>
+                    <CopyButton text="+919790879681" />
                   </span>
                 </p>
               </div>
