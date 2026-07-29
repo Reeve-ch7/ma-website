@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import { AdminProvider } from './context/AdminContext';
 import Navbar from './components/Navbar';
@@ -17,6 +17,16 @@ import Login from './components/Login';
 import Settings from './components/Settings';
 import Enquiry from './components/Enquiry';
 import NotFound from './components/NotFound';
+
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) window.scrollTo(0, 0);
+  }, [pathname, hash]);
+
+  return null;
+}
 
 function MainSite({ scrolled, darkMode, toggleDark }) {
   return (
@@ -78,6 +88,7 @@ function App() {
   return (
     <AdminProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<MainSite scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />} />
           <Route path="/choristers" element={<ChoristersPage scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />} />

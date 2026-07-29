@@ -81,7 +81,7 @@ export default function About() {
           <p className="about__section-desc">
             Twenty voices, four parts, each one a distinct instrument in the ensemble.
           </p>
-          <Link to="/choristers" className="btn-primary">Meet the Choristers</Link>
+          <Link to="/choristers" className="btn-primary">Meet the Team</Link>
         </div>
       </div>
 
