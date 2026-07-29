@@ -51,6 +51,8 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--bg);
+  overscroll-behavior-y: none;
 }
 
 /* Smooth breathing theme transition */
@@ -73,6 +75,7 @@ body {
   font-size: 15px;
   line-height: 1.6;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
 }
 
