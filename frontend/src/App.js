@@ -17,6 +17,10 @@ import Login from './components/Login';
 import Settings from './components/Settings';
 import Enquiry from './components/Enquiry';
 import NotFound from './components/NotFound';
+import Preloader from './components/Preloader';
+import useAssetsLoaded from './utils/useAssetsLoaded';
+
+const HOME_CRITICAL_ASSETS = ['/men-aloho-logo.jpg', '/bgVideos/sweet-spirit-bg.mp4'];
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -29,18 +33,30 @@ function ScrollToTop() {
 }
 
 function MainSite({ scrolled, darkMode, toggleDark }) {
+  const assetsLoaded = useAssetsLoaded(HOME_CRITICAL_ASSETS);
+
+  useEffect(() => {
+    document.body.style.overflow = assetsLoaded ? '' : 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [assetsLoaded]);
+
   return (
     <div className="App">
-      <Navbar scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />
-      <Hero />
-      <Music />
-      <Watch />
-      <About />
-      <Concerts />
-      <MusicRequest />
-      <Gallery />
-      <Contact />
-      <Footer />
+      <Preloader visible={!assetsLoaded} />
+      {assetsLoaded && (
+        <>
+          <Navbar scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />
+          <Hero />
+          <Music />
+          <Watch />
+          <About />
+          <Concerts />
+          <MusicRequest />
+          <Gallery />
+          <Contact />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }

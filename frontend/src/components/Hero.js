@@ -17,6 +17,7 @@ export default function Hero() {
         muted
         loop
         playsInline
+        preload="auto"
         src="/bgVideos/sweet-spirit-bg.mp4"
       />
       <div className="hero__overlay" />
