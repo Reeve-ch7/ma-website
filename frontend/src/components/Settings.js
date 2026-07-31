@@ -583,6 +583,7 @@ export default function Settings() {
           ))}
         </nav>
         <div className="settings-sidebar-footer">
+          <a href="/analytics" className="settings-site-link">Analytics →</a>
           <a href="/" className="settings-site-link">← View site</a>
           <button className="settings-logout" onClick={handleLogout}>Sign out</button>
         </div>

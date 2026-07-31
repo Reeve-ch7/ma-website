@@ -21,15 +21,19 @@ function preload(src) {
   });
 }
 
+const MAX_WAIT_MS = 6000;
+
 export default function useAssetsLoaded(sources) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all(sources.map(preload)).then(() => {
+    let timeoutId;
+    const timeout = new Promise((resolve) => { timeoutId = setTimeout(resolve, MAX_WAIT_MS); });
+    Promise.race([Promise.all(sources.map(preload)), timeout]).then(() => {
       if (!cancelled) setLoaded(true);
     });
-    return () => { cancelled = true; };
+    return () => { cancelled = true; clearTimeout(timeoutId); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

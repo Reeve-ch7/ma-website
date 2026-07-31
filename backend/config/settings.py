@@ -12,6 +12,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "api",
+    "analytics",
 ]
 
 MIDDLEWARE = [
@@ -21,8 +22,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
-
-DATABASES = {}
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -54,6 +53,7 @@ MEDIA_ROOT = BASE_DIR / "uploads"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 import os
+import dj_database_url
 
 # Load .env file if present
 _env_path = BASE_DIR / ".env"
@@ -63,6 +63,17 @@ if _env_path.exists():
         if _line and not _line.startswith("#") and "=" in _line:
             _k, _v = _line.split("=", 1)
             os.environ.setdefault(_k.strip(), _v.strip())
+
+DATABASE_URL = os.environ.get("DATABASE_URL", "")
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL, conn_max_age=0,
+            ssl_require=not DATABASE_URL.startswith("sqlite"),
+        )
+    }
+else:
+    DATABASES = {}
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"

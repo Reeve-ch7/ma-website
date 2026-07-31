@@ -15,12 +15,14 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Settings from './components/Settings';
+import Analytics from './components/Analytics';
 import Enquiry from './components/Enquiry';
 import NotFound from './components/NotFound';
 import Preloader from './components/Preloader';
 import useAssetsLoaded from './utils/useAssetsLoaded';
+import { trackVisit, sendHeartbeat } from './lib/analyticsService';
 
-const HOME_CRITICAL_ASSETS = ['/men-aloho-logo.jpg', '/bgVideos/sweet-spirit-bg.mp4'];
+const HOME_CRITICAL_ASSETS = ['/men-aloho-logo.jpg'];
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -28,6 +30,22 @@ function ScrollToTop() {
   useEffect(() => {
     if (!hash) window.scrollTo(0, 0);
   }, [pathname, hash]);
+
+  return null;
+}
+
+function AnalyticsTracker() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    trackVisit(pathname);
+  }, [pathname]);
+
+  useEffect(() => {
+    sendHeartbeat();
+    const id = setInterval(sendHeartbeat, 30_000);
+    return () => clearInterval(id);
+  }, []);
 
   return null;
 }
@@ -105,11 +123,13 @@ function App() {
     <AdminProvider>
       <BrowserRouter>
         <ScrollToTop />
+        <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<MainSite scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />} />
           <Route path="/choristers" element={<ChoristersPage scrolled={scrolled} darkMode={darkMode} toggleDark={toggleDark} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/analytics" element={<Analytics />} />
           <Route path="/enquiry" element={<Enquiry />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
