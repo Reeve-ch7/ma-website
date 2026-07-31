@@ -1,17 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Hero.css';
 
 export default function Hero() {
   const [scrolled, setScrolled] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Mobile browsers can silently block the `autoPlay` attribute (iOS's
+  // Safari "Never Auto-Play" setting, Low Power Mode, Data Saver, or
+  // restrictive in-app browsers). Drive playback imperatively and, if the
+  // browser still refuses, retry on the first real user gesture — that
+  // reliably overrides these restrictions.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+
+    const tryPlay = () => video.play()?.catch(() => {});
+    tryPlay();
+
+    const events = ['touchstart', 'click', 'scroll', 'keydown'];
+    const retry = () => {
+      tryPlay();
+      events.forEach((e) => window.removeEventListener(e, retry));
+    };
+    events.forEach((e) => window.addEventListener(e, retry, { passive: true, once: true }));
+
+    return () => events.forEach((e) => window.removeEventListener(e, retry));
+  }, []);
+
   return (
     <section id="home" className="hero">
       <video
+        ref={videoRef}
         className="hero__bg-video"
         autoPlay
         muted
